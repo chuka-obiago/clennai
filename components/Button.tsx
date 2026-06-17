@@ -6,6 +6,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   className?: string;
+  textColor?: string;
 }
 
 export default function Button({
@@ -14,6 +15,7 @@ export default function Button({
   type = "button",
   disabled = false,
   className = "",
+  textColor = "#162e31",
 }: ButtonProps) {
   return (
     <>
@@ -68,7 +70,7 @@ export default function Button({
           font-size: 14px;
           font-weight: 600;
           letter-spacing: -0.01em;
-          color: #162e31;
+          color: ${textColor};
           transition: color 0.4s ease;
           user-select: none;
         }

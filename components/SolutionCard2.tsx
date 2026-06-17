@@ -41,7 +41,7 @@ const SolutionCard2: React.FC<SolutionCard2Props> = ({
     { text: "Targets only your ideal customer profile" },
     { text: "Plugs into your existing CRM or inbox" },
   ],
-  ctaHref = "#contact",
+  ctaHref = "/#contact",
   backgroundImage,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);

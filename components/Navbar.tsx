@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Button from "@/components/Button";
 
 const NAV_LINKS = [
-  { label: "Solutions", href: "/solutions" },
-  { label: "Our Process", href: "/our-process" },
+  { label: "Solutions", href: "/#solutions" },
+  { label: "Our Process", href: "/#our-process" },
   { label: "About", href: "/about" },
 ];
 
@@ -14,8 +14,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   // "idle" → not yet decided | "animate" → play intro | "visible" → skip intro
-  const [animState, setAnimState] = useState<"idle" | "animate" | "visible">("idle");
-  const router = useRouter(); 
+  const [animState, setAnimState] = useState<"idle" | "animate" | "visible">(
+    "idle",
+  );
+  const router = useRouter();
 
   useEffect(() => {
     // sessionStorage is wiped on every full page reload, so absence of the
@@ -44,11 +46,44 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
+
+  const pathname = usePathname();
 
   const navigate = (href: string) => {
     setMenuOpen(false);
+
+    // normal pages like /about, /privacy, /terms
+    if (!href.includes("#")) {
+      // Already on this exact page: router.push is a no-op since the path
+      // doesn't change, so force a real reload to restart the page fresh.
+      if (pathname === href) {
+        window.location.href = href;
+        return;
+      }
+
+      router.push(href);
+      return;
+    }
+
+    const section = href.split("#")[1];
+
+    if (pathname === "/") {
+      const element = document.getElementById(section);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      return;
+    }
+
     router.push(href);
   };
 
@@ -379,7 +414,9 @@ export default function Navbar() {
           scrolled ? "scrolled" : "",
           animState === "animate" ? "animate" : "",
           animState === "visible" ? "no-animate" : "",
-        ].filter(Boolean).join(" ")}
+        ]
+          .filter(Boolean)
+          .join(" ")}
         role="navigation"
         aria-label="Main navigation"
       >
@@ -411,7 +448,7 @@ export default function Navbar() {
           <div className="nav-cta">
             <Button
               text="Book a Strategy Call"
-              onClick={() => navigate("/contact")}
+              onClick={() => navigate("/#contact")}
             />
           </div>
 

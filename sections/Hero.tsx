@@ -3,7 +3,6 @@
 import { useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
-// import TrustedBy from "@/sections/TrustedBy";
 import IntegratedWith from "@/sections/IntegratedWith";
 
 export default function Hero2() {

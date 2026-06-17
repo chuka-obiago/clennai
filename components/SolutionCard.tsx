@@ -200,7 +200,7 @@ export default function SolutionCard() {
 
         .sc-cta {
           font-family: 'Outfit', sans-serif;
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 500;
           color: #4a7fa5;
           background: none;
@@ -417,9 +417,9 @@ export default function SolutionCard() {
               ))}
             </ul>
 
-            <button className="sc-cta">
-              Learn More <span aria-hidden="true">→</span>
-            </button>
+            <a href="#contact" className="sc-cta">
+              Talk to us <span aria-hidden="true">→</span>
+            </a>
           </div>
 
           {/* ── RIGHT ── */}
