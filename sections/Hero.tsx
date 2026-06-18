@@ -176,7 +176,7 @@ export default function Hero2() {
           <div ref={ctaRef} className="reveal-item">
             <Button
               text="Book a Strategy Call"
-              onClick={() => router.push("/contact")}
+              onClick={() => window.open("https://calendly.com/chukaobiago/30min", "_blank", "noopener,noreferrer")}
             />
           </div>
         </div>

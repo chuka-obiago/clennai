@@ -72,6 +72,142 @@ export default function AboutPage() {
 
   return (
     <main className="about-page">
+      {/* Image Hero */}
+      <section className="image-hero" aria-label="About ClennAI">
+        <Image
+          src="/about_hero.webp"
+          alt=""
+          fill
+          priority
+          className="image-hero-bg"
+        />
+        <div className="image-hero-overlay" />
+        <div className="image-hero-content">
+          <h1 className="image-hero-text">About ClennAI</h1>
+        </div>
+      </section>
+
+      {/* Intro Section */}
+      <section className="about-section intro-section">
+        <div className="about-inner">
+          <div
+            ref={intro.ref}
+            className={`intro-headline-block reveal ${intro.visible ? "is-visible" : ""}`}
+          >
+            <h2 className="intro-text">
+              Helping Businesses <em>Scale with AI</em>
+            </h2>
+
+            <hr className="about-rule" />
+
+            <div className="sub-block">
+              <p className="eyebrow">Who we are</p>
+              <p className="subheadline">
+                ClennAI helps businesses eliminate repetitive work, improve
+                efficiency, and unlock growth through practical AI automation
+                solutions.
+              </p>
+              <p className="subheadline">
+                We build intelligent systems that connect tools, streamline
+                processes, and help teams spend less time on manual tasks and
+                more time on high-value work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className="about-section founder-section" aria-label="Founder">
+        <div className="about-inner">
+          <div
+            ref={founder.ref}
+            className={`founder-grid reveal ${founder.visible ? "is-visible" : ""}`}
+          >
+            <div className="founder-image-col">
+              <div className="founder-image-wrap">
+                <Image
+                  src="/black_suit_nobg.png"
+                  alt="Founder of ClennAI"
+                  width={640}
+                  height={800}
+                  className="founder-image"
+                  priority
+                />
+              </div>
+              <p className="founder-name">Chukwuka Obiago</p>
+              <p className="founder-title">Founder</p>
+            </div>
+
+            <div className="founder-text-col">
+              <p className="founder-quote">
+                &ldquo;Built on a simple belief: AI should work for the
+                business, not the other way around.
+                <br />
+                ClennAI was founded with the mission of helping businesses
+                adopt AI in a practical and meaningful way.&rdquo;
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Outcomes Section */}
+      <section className="about-section outcomes-section" aria-label="What We Help Businesses Achieve">
+        <div className="about-inner">
+          <div
+            ref={outcomesSection.ref}
+            className={`outcomes-content reveal ${
+              outcomesSection.visible ? "is-visible" : ""
+            }`}
+          >
+            <div className="centered-head">
+              <p className="eyebrow">Outcomes</p>
+              <h2 className="section-heading">What We Help Businesses Achieve</h2>
+              <hr className="about-rule" />
+            </div>
+
+            <ul className="outcomes-list">
+              {outcomes.map((item, i) => (
+                <li
+                  className="outcome-row"
+                  key={item}
+                  style={{ transitionDelay: `${i * 70}ms` }}
+                >
+                  <Checkmark />
+                  <span className="outcome-text">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Approach Section */}
+      <section className="about-section approach-section" aria-label="Our Approach">
+        <div className="about-inner">
+          <div
+            ref={approach.ref}
+            className={`approach-content reveal ${
+              approach.visible ? "is-visible" : ""
+            }`}
+          >
+            <p className="eyebrow centered">Our Approach</p>
+            <h2 className="approach-heading">
+              We believe AI should be practical, not complicated.
+            </h2>
+            <hr className="about-rule centered" />
+            <p className="approach-body">
+              Every solution is designed around real business challenges,
+              integrating with existing processes to create systems that are
+              reliable, scalable, and built for long-term impact.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+
       <style jsx>{`
         .about-page {
           background-color: #f9fafb;
@@ -248,6 +384,15 @@ export default function AboutPage() {
           gap: 14px;
         }
 
+        .founder-name {
+          font-family: "Outfit", sans-serif;
+          font-size: 17px;
+          font-weight: 500;
+          color: #0f1923;
+          margin: 0;
+          margin-top: -4px;
+        }
+
         .founder-image-wrap {
           position: relative;
           width: 100%;
@@ -275,6 +420,7 @@ export default function AboutPage() {
           text-transform: uppercase;
           color: #5a6475;
           margin: 0;
+          margin-top: -8px;
         }
 
         .founder-text-col {
@@ -414,142 +560,6 @@ export default function AboutPage() {
           }
         }
       `}</style>
-
-      {/* Image Hero */}
-      <section className="image-hero" aria-label="About ClennAI">
-        <Image
-          src="/abstract1.png"
-          alt=""
-          fill
-          priority
-          className="image-hero-bg"
-        />
-        <div className="image-hero-overlay" />
-        <div className="image-hero-content">
-          <h1 className="image-hero-text">About ClennAI</h1>
-        </div>
-      </section>
-
-      {/* Intro Section */}
-      <section className="about-section intro-section">
-        <div className="about-inner">
-          <div
-            ref={intro.ref}
-            className={`intro-headline-block reveal ${intro.visible ? "is-visible" : ""}`}
-          >
-            <h2 className="intro-text">
-              Helping Businesses <em>Scale with AI</em>
-            </h2>
-
-            <hr className="about-rule" />
-
-            <div className="sub-block">
-              <p className="eyebrow">Who we are</p>
-              <p className="subheadline">
-                ClennAI helps businesses eliminate repetitive work, improve
-                efficiency, and unlock growth through practical AI automation
-                solutions.
-              </p>
-              <p className="subheadline">
-                We build intelligent systems that connect tools, streamline
-                processes, and help teams spend less time on manual tasks and
-                more time on high-value work.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Founder Section */}
-      <section className="about-section founder-section" aria-label="Founder">
-        <div className="about-inner">
-          <div
-            ref={founder.ref}
-            className={`founder-grid reveal ${founder.visible ? "is-visible" : ""}`}
-          >
-            <div className="founder-image-col">
-              <div className="founder-image-wrap">
-                <Image
-                  src="/black_suit_nobg.png"
-                  alt="Founder of ClennAI"
-                  width={640}
-                  height={800}
-                  className="founder-image"
-                  priority
-                />
-              </div>
-              <p className="founder-title">Founder</p>
-            </div>
-
-            <div className="founder-text-col">
-              <p className="founder-quote">
-                &ldquo;Built on a simple belief: AI should work for the
-                business, not the other way around.
-                <br />
-                <br />
-                ClennAI was founded with the mission of helping businesses
-                adopt AI in a practical and meaningful way.&rdquo;
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Outcomes Section */}
-      <section className="about-section outcomes-section" aria-label="What We Help Businesses Achieve">
-        <div className="about-inner">
-          <div
-            ref={outcomesSection.ref}
-            className={`outcomes-content reveal ${
-              outcomesSection.visible ? "is-visible" : ""
-            }`}
-          >
-            <div className="centered-head">
-              <p className="eyebrow">Outcomes</p>
-              <h2 className="section-heading">What We Help Businesses Achieve</h2>
-              <hr className="about-rule" />
-            </div>
-
-            <ul className="outcomes-list">
-              {outcomes.map((item, i) => (
-                <li
-                  className="outcome-row"
-                  key={item}
-                  style={{ transitionDelay: `${i * 70}ms` }}
-                >
-                  <Checkmark />
-                  <span className="outcome-text">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Approach Section */}
-      <section className="about-section approach-section" aria-label="Our Approach">
-        <div className="about-inner">
-          <div
-            ref={approach.ref}
-            className={`approach-content reveal ${
-              approach.visible ? "is-visible" : ""
-            }`}
-          >
-            <p className="eyebrow centered">Our Approach</p>
-            <h2 className="approach-heading">
-              We believe AI should be practical, <br/> not complicated.
-            </h2>
-            <hr className="about-rule centered" />
-            <p className="approach-body">
-              Every solution is designed around real business challenges,
-              integrating with existing processes to create systems that are
-              reliable, scalable, and built for long-term impact.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
     </main>
   );
 }

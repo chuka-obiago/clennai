@@ -54,7 +54,7 @@ export default function Footer() {
           <div className="footer-brand-col">
             <span className="footer-logo">ClennAI</span>
             <p className="footer-description">
-              Empowering next-generation digital experiences with intelligent, adaptive solutions.
+              Empowering businesses with smarter systems designed for modern growth.
             </p>
           </div>
 

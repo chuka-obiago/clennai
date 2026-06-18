@@ -448,7 +448,7 @@ export default function Navbar() {
           <div className="nav-cta">
             <Button
               text="Book a Strategy Call"
-              onClick={() => navigate("/#contact")}
+              onClick={() => window.open("https://calendly.com/chukaobiago/30min", "_blank", "noopener,noreferrer")}
             />
           </div>
 
@@ -508,7 +508,7 @@ export default function Navbar() {
         <div className="mobile-cta">
           <Button
             text="Book a Strategy Call"
-            onClick={() => navigate("/contact")}
+            onClick={() => window.open("https://calendly.com/chukaobiago/30min", "_blank", "noopener,noreferrer")}
           />
         </div>
       </div>

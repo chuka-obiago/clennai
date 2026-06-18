@@ -67,7 +67,7 @@ export default function OurProcess() {
           <div className="our-process-cta">
             <Button
               text="Book a Strategy Call"
-              onClick={() => router.push("/contact")}
+              onClick={() => window.open("https://calendly.com/chukaobiago/30min", "_blank", "noopener,noreferrer")}
             />
           </div>
         </div>

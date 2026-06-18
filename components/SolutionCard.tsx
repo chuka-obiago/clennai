@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 const FLOW_STEPS = [
-  { id: "lead",      label: "New Lead",        sublabel: "Form submitted"          },
+  { id: "lead",      label: "New Lead",        sublabel: "Instantly captured"          },
   { id: "ai",        label: "AI Qualification", sublabel: "Scoring & enrichment"    },
   { id: "booked",    label: "Meeting Booked",   sublabel: "Calendar invite sent"    },
-  { id: "crm",       label: "CRM Updated",      sublabel: "Deal created in HubSpot" },
+  { id: "crm",       label: "CRM Updated",      sublabel: "Synced to CRM" },
 ];
 
 const FEATURES_DESKTOP = [
-  "AI lead qualification",
+  "Runs 24/7",
   "Automatic booking",
   "CRM synchronization",
   "Instant notifications",

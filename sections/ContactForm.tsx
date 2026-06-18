@@ -31,6 +31,7 @@ export default function ContactForm() {
   const leftRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [fields, setFields] = useState<FormFields>({
     name: "",
@@ -40,6 +41,7 @@ export default function ContactForm() {
     challenge: "",
   });
 
+  const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<
     Partial<Record<keyof FormFields, boolean>>
@@ -60,7 +62,7 @@ export default function ContactForm() {
     return () => observer.disconnect();
   }, []);
 
-  // Sticky left: stick only while inside the section
+  // Sticky left column positioning
   useEffect(() => {
     const section = sectionRef.current;
     const left = leftRef.current;
@@ -127,6 +129,13 @@ export default function ContactForm() {
   };
 
   const handleSubmit = async () => {
+    // Prevent duplicate triggers if submissions are already mid-flight
+    if (submitting) return;
+
+    if (honeypot.trim() !== "") {
+      return;
+    }
+
     const allTouched = {
       name: true,
       email: true,
@@ -138,31 +147,68 @@ export default function ContactForm() {
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
+    setSubmitError("");
     setSubmitting(true);
-    // Replace with your real API call
-    await new Promise((res) => setTimeout(res, 800));
-    setSubmitting(false);
-    router.push("/success");
+
+    try {
+      const payload = {
+        name: fields.name,
+        email: fields.email,
+        company: fields.companyName,
+        website: fields.companyWebsite.trim() || "n/a",
+        message: fields.challenge,
+      };
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error("Submission failed");
+      }
+
+      router.push("/success");
+    } catch (err) {
+      setSubmitError(
+        "Something went wrong sending your message. Please try again."
+      );
+      setSubmitting(false); // Re-enable the form only on explicit runtime errors
+    }
   };
 
   return (
     <section id="contact" ref={sectionRef} className="cf-section">
       <div className={`cf-container ${visible ? "cf-visible" : ""}`}>
-        {/* Left — sticky on desktop */}
         <div className="cf-left" ref={leftRef}>
           <h2 className="cf-heading">
-            Ready for your{" "}
-            <span className="cf-accent">AI Solution?</span>
+            Ready for your <span className="cf-accent">AI Solution?</span>
           </h2>
           <p className="cf-sub">
             Let&apos;s find the money your business is leaving on the table.
           </p>
         </div>
 
-        {/* Right — form card */}
         <div className="cf-card">
           <div className="cf-field-group">
-            {/* Name */}
+            <div className="cf-honeypot" aria-hidden="true">
+              <label htmlFor="company_role">Company Role</label>
+              <input
+                id="company_role"
+                type="text"
+                name="company_role"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
+
             <div className="cf-field">
               <label className="cf-label">
                 Name<RequiredMark />
@@ -178,13 +224,13 @@ export default function ContactForm() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 autoComplete="given-name"
+                disabled={submitting}
               />
               {errors.name && touched.name && (
                 <span className="cf-error">{errors.name}</span>
               )}
             </div>
 
-            {/* Email */}
             <div className="cf-field">
               <label className="cf-label">
                 Email<RequiredMark />
@@ -200,13 +246,13 @@ export default function ContactForm() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 autoComplete="email"
+                disabled={submitting}
               />
               {errors.email && touched.email && (
                 <span className="cf-error">{errors.email}</span>
               )}
             </div>
 
-            {/* Company Name */}
             <div className="cf-field">
               <label className="cf-label">
                 Company Name<RequiredMark />
@@ -224,13 +270,13 @@ export default function ContactForm() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 autoComplete="organization"
+                disabled={submitting}
               />
               {errors.companyName && touched.companyName && (
                 <span className="cf-error">{errors.companyName}</span>
               )}
             </div>
 
-            {/* Company Website — optional */}
             <div className="cf-field">
               <label className="cf-label">Company Website</label>
               <input
@@ -241,10 +287,10 @@ export default function ContactForm() {
                 value={fields.companyWebsite}
                 onChange={handleChange}
                 autoComplete="url"
+                disabled={submitting}
               />
             </div>
 
-            {/* Challenge */}
             <div className="cf-field">
               <label className="cf-label">
                 Tell us about your current challenge?<RequiredMark />
@@ -259,6 +305,7 @@ export default function ContactForm() {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 rows={4}
+                disabled={submitting}
               />
               {errors.challenge && touched.challenge && (
                 <span className="cf-error">{errors.challenge}</span>
@@ -266,10 +313,17 @@ export default function ContactForm() {
             </div>
           </div>
 
+          {submitError && (
+            <p className="cf-submit-error" role="alert">
+              {submitError}
+            </p>
+          )}
+
           <div className="cf-submit-wrap">
             <Button
               text={submitting ? "Sending…" : "Get Started"}
               onClick={handleSubmit}
+              disabled={submitting}
               textColor="#ffffff"
             />
           </div>
@@ -302,7 +356,6 @@ export default function ContactForm() {
           transform: translateY(0);
         }
 
-        /* Left — sticky anchor */
         .cf-left {
           flex: 0 0 38%;
           align-self: flex-start;
@@ -332,7 +385,6 @@ export default function ContactForm() {
           margin: 0;
         }
 
-        /* Card */
         .cf-card {
           flex: 1;
           background: #161a20;
@@ -348,6 +400,16 @@ export default function ContactForm() {
           display: flex;
           flex-direction: column;
           gap: 20px;
+        }
+
+        .cf-honeypot {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          opacity: 0;
+          pointer-events: none;
+          left: -9999px;
         }
 
         .cf-field {
@@ -404,12 +466,18 @@ export default function ContactForm() {
           margin-top: 2px;
         }
 
+        .cf-submit-error {
+          font-size: 0.875rem;
+          color: #ef4444;
+          margin: 0;
+          text-align: center;
+        }
+
         .cf-submit-wrap {
           display: flex;
           justify-content: center;
         }
 
-        /* Mobile */
         @media (max-width: 768px) {
           .cf-section {
             padding: 72px 0;

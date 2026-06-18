@@ -182,9 +182,9 @@ export default function Solutions() {
             title="AI Lead Generation System"
             description="We build a fully automated pipeline that finds and qualifies your ideal customers."
             highlights={[
-              { text: "Runs 24/7" },
+              { text: "Automated lead discovery" },
               { text: "Targets only your ideal customer profile" },
-              { text: "Plugs into your existing CRM or inbox" },
+              { text: "Plugs into your existing CRM" },
             ]}
             ctaHref="#contact"
             backgroundImage="/aiAbstract2.webp"
@@ -193,12 +193,12 @@ export default function Solutions() {
 
         <div style={{ marginBottom: "32px" }}>
           <SolutionCard2
-            title="AI Lead Generation System"
-            description="We build a fully automated pipeline that finds and qualifies your ideal customers."
+            title="AI Outreach System"
+            description="We build automated outreach systems that connect with the right prospects and keep conversations flowing."
             highlights={[
-              { text: "Runs 24/7" },
-              { text: "Targets only your ideal customer profile" },
-              { text: "Plugs into your existing CRM or inbox" },
+              { text: "Personalized outreach" },
+              { text: "Improved response rates" },
+              { text: "Automated follow-ups" },
             ]}
             ctaHref="#contact"
             backgroundImage="/aiAbstract1.webp"
@@ -207,14 +207,14 @@ export default function Solutions() {
 
         <SolutionCard2
           title="Custom Solutions"
-          description="We build a fully automated pipeline that finds and qualifies your ideal customers."
+          description="We build tailored systems that solve your unique business challenges."
           highlights={[
-            { text: "Runs 24/7" },
-            { text: "Targets only your ideal customer profile" },
-            { text: "Plugs into your existing CRM or inbox" },
+            { text: "Built around your needs" },
+            { text: "Automate repetitive processes" },
+            { text: "Scales your business" },
           ]}
           ctaHref="#contact"
-          
+          backgroundImage="/about_hero.webp"
         />
       </div>
       
