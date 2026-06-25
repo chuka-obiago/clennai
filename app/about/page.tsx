@@ -220,7 +220,8 @@ export default function AboutPage() {
         .image-hero {
           position: relative;
           width: 100%;
-          height: clamp(280px, 45vw, 420px);
+          // height: clamp(280px, 30vw, 350px);
+          height: 40dvh;
           min-height: 280px;
           display: flex;
           align-items: center;
