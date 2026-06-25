@@ -70,7 +70,8 @@ export default function Hero2() {
         .hero-section {
           position: relative;
           width: 100%;
-          height: 100vh;
+          height: 100vh; /* fallback */
+          height: 100dvh;
           min-height: 650px;
           display: flex;
           flex-direction: column;
