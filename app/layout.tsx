@@ -1,7 +1,7 @@
 import Script from "next/script";
 import type { Metadata } from "next";
 import "./globals.css";
-// import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 import StyledJsxRegistry from "./registry";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* <Navbar /> */}
+        <Navbar />
         <StyledJsxRegistry>{children}</StyledJsxRegistry>
 
         <Script

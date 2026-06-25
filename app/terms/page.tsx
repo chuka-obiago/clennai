@@ -26,7 +26,7 @@ export default function TermsOfService() {
           {/* Header Section */}
           <header className="border-b border-gray-8xl pb-6">
             <p className="text-sm tracking-wide uppercase text-gray-400 mb-2 mt-15">
-              Updated: June 18, 2026
+              Updated: June 25, 2026
             </p>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
               Terms of Service
